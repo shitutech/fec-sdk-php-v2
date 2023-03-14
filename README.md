@@ -31,12 +31,12 @@ composer.phar require shitutech/fes
 ## 使用
 
 ```php
-use Shitutech\Fec\ClientConfig;
-use Shitutech\Fec\ClientRequest;
-use Shitutech\Fec\ClientResponse;
-use Shitutech\Fec\Constants;
-use Shitutech\Fec\Models\Request\AccInfoRequest;
-use Shitutech\Fec\Models\Response\AccInfoResponse;
+use Shitutech\Fes\FeClientRequest;
+use Shitutech\Fes\FeClientResponse;
+use Shitutech\Fes\FeConfig;
+use Shitutech\Fes\FeConstant;
+use Shitutech\Fes\Modules\Requests\Member\BankListRequest;
+use Shitutech\Fes\Modules\Responses\Member\BankListResponse;
 
 FeConfig::getInstance()->setMerchantNo("A*****-******-*****")
     ->setProviderNo("")
@@ -45,39 +45,32 @@ FeConfig::getInstance()->setMerchantNo("A*****-******-*****")
     ->setPrivateKey('');
     
 try {
-    $objAccInfo = new AccInfoRequest();
-    $objAccInfo->setPayPass(Constants::PAY_PASS_ALIPAY);
-    $objClientReq = new ClientRequest($objAccInfo);
-    $respData = $objClientReq->send();
+    $objReq = (new BankListRequest())->setPayPass(FeConstant::PAY_PASS_ZB);
 
-    $objClientResp = new ClientResponse(new AccInfoResponse(), $respData);
+    var_export($objReq->fetchBizData(false));
+    echo PHP_EOL . PHP_EOL;
+
+    $respData = (new FeClientRequest($objReq))->send();
+
+    $objResp = (new FeClientResponse(new BankListResponse(), $respData))->fetchResult();
 
     /**
-     * 这里声明的目的是为了 IDE (如 PhpStorm) 语法提示
-     * @var AccInfoResponse $objResultResp
+     * @var BankListResponse $objResp
      */
-    $objResultResp = $objClientResp->fetchResult();
+    //var_export($objResp->getBankList());
 
-    var_dump($objResultResp->getBalance());
-} catch (Exception $e) {
-    var_dump($e->getCode() . "::" . $e->getMessage());
+    foreach ($objResp->getBankList() as $objBank) {
+        var_dump($objBank->getText().'::'.$objBank->getValue());
+    }
+
+} catch (\Throwable $e) {
+    var_dump(['code' => $e->getCode(), 'msg' => $e->getMessage(), 'fLine' => $e->getFile() . ":" . $e->getLine(),]);
 }
 
 ```
 
 # 接口
 
-| API             | 请求类                            | 响应类                             |
-|-----------------|--------------------------------|---------------------------------|
-| 用户注册            | UserRegisterRequest::class     | UserRegisterResponse::class     |
-| 用户信息查询          | UserQueryRequest::class        | UserQueryResponse::class        |
-| 用户信息变更 - 注册手机号  | UserUpdatePhoneRequest::class  | UserUpdateResponse::class       |
-| 用户信息变更 - 影像件    | UserUpdateImageRequest::class  | UserUpdateResponse::class       |
-| 用户信息变更 - 拓展业务类型 | UserUpdateExpandRequest::class | UserUpdateResponse::class       |
-| 用户信息变更 - 结算卡信息  | UserUpdateCardRequest::class   | UserUpdateResponse::class       |
-| 用户账户开户          | UserOpenRequest::class         | UserOpenResponse::class         |
-| 用户账户开户（活体认证）    | UserOpenVideoRequest::class    | UserOpenResponse::class         |
-| 订单支付            | OrderPayRequest::class         | OrderPayResponse::class         |
-| 批次订单号查询订单       | OrderQueryBatchRequest::class  | OrderQueryBatchResponse::class  |
-| 子订单详情查询         | OrderQueryDetailRequest::class | OrderQueryDetailResponse::class |
-| 商户信息查询          | AccInfoRequest::class          | AccInfoResponse::class          |
+| API         | 请求类                    | 响应类                     |
+|-------------|------------------------|-------------------------|
+| 查询通道支持的银行列表 | BankListRequest::class | BankListResponse::class |

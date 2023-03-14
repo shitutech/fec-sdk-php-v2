@@ -8,7 +8,7 @@ use Shitutech\Fes\Modules\Maps\BankListMap;
 class BankListResponse extends BaseResponse
 {
     /**
-     * @var array 通道支持的银行列表
+     * @var array<BankListMap> 通道支持的银行列表
      */
     protected $bankList = [];
 
