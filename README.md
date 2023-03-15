@@ -73,4 +73,5 @@ try {
 
 | API         | 请求类                    | 响应类                     |
 |-------------|------------------------|-------------------------|
+| 会员注册接口      | RegisterRequest::class | RegisterResponse::class |
 | 查询通道支持的银行列表 | BankListRequest::class | BankListResponse::class |

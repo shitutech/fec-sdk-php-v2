@@ -16,7 +16,19 @@ abstract class BaseRequest
 
         $clzProperties = get_object_vars($this);
 
+        $ignoreEmptyProperties = [];
+        if (
+            defined('static::IGNORE_EMPTY_PROPERTIES') &&
+            static::IGNORE_EMPTY_PROPERTIES && is_array(static::IGNORE_EMPTY_PROPERTIES)
+        ) {
+            $ignoreEmptyProperties = static::IGNORE_EMPTY_PROPERTIES;
+        }
+
         foreach ($clzProperties as $property => $propertyValue) {
+            if ($ignoreEmptyProperties && in_array($property, $ignoreEmptyProperties) && trim($propertyValue) === '') {
+                continue;
+            }
+
             $bizData[$property] = $propertyValue;
         }
 

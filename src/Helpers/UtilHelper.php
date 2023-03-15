@@ -68,7 +68,7 @@ final class UtilHelper
      * @param string $mobile
      * @param bool $disableException 是否抛异常，默认抛
      * @return bool
-     * @throws \Exception
+     * @throws FeException
      */
     public static function verifyMobile(string $mobile, bool $disableException = false): bool
     {
@@ -86,7 +86,7 @@ final class UtilHelper
      * @param string $number
      * @param bool $disableException 是否抛异常，默认抛
      * @return bool
-     * @throws \Exception
+     * @throws FeException
      */
     public static function verifyIdCard(string $number, bool $disableException = false): bool
     {

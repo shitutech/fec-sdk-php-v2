@@ -65,10 +65,6 @@ class FeClientResponse
             if (!isset($resultData['statusCode'])) {
                 throw new FeException("业务数据缺少业务返回码字段 statusCode");
             }
-
-            if ($resultData['statusCode'] != '1000') {
-                throw new FeException("银行响应报告发生异常。Err: {$resultData['statusCode']}:::{$resultData['msg']}");
-            }
         }
 
         $this->response->setProperty($resultData);
