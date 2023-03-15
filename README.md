@@ -71,7 +71,11 @@ try {
 
 # 接口
 
-| API         | 请求类                    | 响应类                     |
-|-------------|------------------------|-------------------------|
-| 会员注册接口      | RegisterRequest::class | RegisterResponse::class |
-| 查询通道支持的银行列表 | BankListRequest::class | BankListResponse::class |
+| API          | 请求类                         | 响应类                          |
+|--------------|-----------------------------|------------------------------|
+| 会员注册接口       | RegisterRequest::class      | RegisterResponse::class      |
+| 绑定/变更结算卡     | BankCardRequest::class      | BankCardResponse::class      |
+| 会员基本信息查询接口   | BaseInfoRequest::class      | BaseInfoResponse::class      |
+| 查询会员系统id     | SystemIdRequest::class      | SystemIdResponse::class      |
+| 查询会员绑定的结算卡列表 | QueryBankCardRequest::class | QueryBankCardResponse::class |
+| 查询通道支持的银行列表  | BankListRequest::class      | BankListResponse::class      |
