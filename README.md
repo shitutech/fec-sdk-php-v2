@@ -79,3 +79,4 @@ try {
 | 查询会员系统id     | SystemIdRequest::class      | SystemIdResponse::class      |
 | 查询会员绑定的结算卡列表 | QueryBankCardRequest::class | QueryBankCardResponse::class |
 | 查询通道支持的银行列表  | BankListRequest::class      | BankListResponse::class      |
+| 订单支付接口       | OrderPayRequest::class      | OrderPayResponse::class      |
