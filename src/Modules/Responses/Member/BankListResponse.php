@@ -2,6 +2,7 @@
 
 namespace Shitutech\Fes\Modules\Responses\Member;
 
+use Shitutech\Fes\FeConstant;
 use Shitutech\Fes\Modules\Base\BaseResponse;
 use Shitutech\Fes\Modules\Maps\BankListMap;
 
@@ -15,6 +16,11 @@ class BankListResponse extends BaseResponse
     protected const MAPPING = [
         'bankList' => [BankListMap::class, self::MAPPING_MULTI],
     ];
+
+    public function getStatusCode(): string
+    {
+        return FeConstant::STATUS_CODE_SUCCESS;
+    }
 
     /**
      * @return array

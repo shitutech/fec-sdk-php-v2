@@ -2,6 +2,8 @@
 
 namespace Shitutech\Fes\Modules\Base;
 
+use Shitutech\Fes\FeConstant;
+
 abstract class BaseResponse extends BaseObject
 {
     /**
@@ -38,6 +40,16 @@ abstract class BaseResponse extends BaseObject
     public function ignoreStatusCode(): bool
     {
         return false;
+    }
+
+    public function isSuccess(): bool
+    {
+        return $this->getStatusCode() == FeConstant::STATUS_CODE_SUCCESS;
+    }
+
+    public function isFailure(): bool
+    {
+        return $this->getStatusCode() == FeConstant::STATUS_CODE_FAILURE;
     }
 
 }
