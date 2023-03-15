@@ -80,3 +80,7 @@ try {
 | 查询会员绑定的结算卡列表 | QueryBankCardRequest::class | QueryBankCardResponse::class |
 | 查询通道支持的银行列表  | BankListRequest::class      | BankListResponse::class      |
 | 订单支付接口       | OrderPayRequest::class      | OrderPayResponse::class      |
+| 批次号订单查询接口    | OrderBatchRequest::class    | OrderBatchResponse::class    |
+| 子订单查询接口      | OrderSubRequest::class      | OrderSubResponse::class      |
+| 商户账户信息查询接口   | AccountInfoRequest::class   | AccountInfoResponse::class   |
+| 商户账户列表查询接口   | AccountListRequest::class   | AccountListResponse::class   |
