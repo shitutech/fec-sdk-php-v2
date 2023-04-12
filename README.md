@@ -12,7 +12,7 @@ JAVA SDK 请参考： https://github.com/shitutech/flexible-sdk-java-v2
 
 ```json
 {
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "repositories": [
     {
       "type": "vcs",
